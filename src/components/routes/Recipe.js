@@ -5,6 +5,7 @@ import axios from 'axios'
 export default function Recipe() {
     const { id } = useParams()
     const [recipe, setRecipe] = useState({})
+    const [comments, setComments] = useState({})
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
 
@@ -13,6 +14,7 @@ export default function Recipe() {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}`)
                 setRecipe(response.data)
+                setComments(response.data.comments)
             } catch (err) {
                 console.warn(err)
                 if (err.response) {
@@ -38,25 +40,24 @@ export default function Recipe() {
     console.log(recipe)
     return (
         <div>
-            <h1>A recipe</h1>
+            <h1>{recipe.name}</h1>
 
             <p>{errorMessage}</p>
 
             <div>
-                <Link to={`/recipes/${id}/edit`}>Edit this Recipe</Link>
-
-                <button onClick={handleDelete}>Delete Recipe</button>
-            </div>
-
-            <div>
-                <h2>{recipe.name}</h2>
+                <h2></h2>
                 <p>Ingredients: {recipe.ingredients}</p>
                 <p>Directions: {recipe.directions}</p>
+                <div>
+                    <button><Link style={{ textDecoration: 'none', color: 'black' }} to={`/recipes/${id}/edit`}>Edit this Recipe</Link></button>
+
+                    <button onClick={handleDelete}>Delete Recipe</button>
+                </div>
             </div>
 
             <div>
                 <h2>Comments:</h2>
-                {/* <p>{recipe.comments}</p> */}
+                <p>{comments.content}</p>
 
             </div>
 
