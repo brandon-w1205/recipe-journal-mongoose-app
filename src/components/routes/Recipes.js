@@ -13,7 +13,6 @@ export default function Recipes() {
         const getRecipes = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/recipe`)
-                // console.log(response.data)
                 setRecipes(response.data)
             } catch (err) {
                 console.warn(err)
