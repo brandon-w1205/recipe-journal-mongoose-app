@@ -1,3 +1,4 @@
+// Dependencies
 import './App.css';
 import { 
   BrowserRouter as Router,
@@ -5,7 +6,10 @@ import {
   Route
 } from 'react-router-dom'
 
+// Partials
 import NavBar from './components/partials/NavBar'
+
+// Routes
 import Home from './components/routes/Home'
 import Recipe from './components/routes/Recipe'
 import NewRecipe from './components/routes/NewRecipe'
@@ -23,7 +27,7 @@ function App() {
         <Routes>
 
           <Route 
-            path='/' 
+            path='/'
             element={<Home />} 
           />
           <Route 
