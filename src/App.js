@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar />
-        
+
         <Routes>
 
           <Route 
@@ -40,7 +40,7 @@ function App() {
           />
           <Route 
             path='/recipes/:id/edit' 
-            element={<EditRecipe/>} 
+            element={<EditRecipe />} 
           />
           
         </Routes>
