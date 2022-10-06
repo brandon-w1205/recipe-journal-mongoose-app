@@ -1,5 +1,4 @@
 // Hi, just ting this out, no s
-
 import './App.css';
 import { 
   BrowserRouter as Router,
@@ -19,7 +18,7 @@ import EditRecipe from './components/routes/EditRecipe'
 import EditComment from './components/routes/EditComment'
 import DeleteComment from './components/routes/DeleteComment'
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Router>
@@ -51,7 +50,5 @@ function App() {
         </Routes>
       </Router>
     </div>
-  );
+  )
 }
-
-export default App;
