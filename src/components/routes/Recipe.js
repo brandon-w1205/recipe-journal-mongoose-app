@@ -7,6 +7,9 @@ export default function Recipe() {
     const [recipe, setRecipe] = useState({})
     const [comments, setComments] = useState({})
     const [errorMessage, setErrorMessage] = useState('')
+    const [commentForm, setCommentForm] = useState({
+        content: ''
+    })
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -29,6 +32,19 @@ export default function Recipe() {
         try {
             await axios.delete(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}`)
             navigate('/recipes')
+        } catch (err) {
+            console.warn(err)
+            if (err.response) {
+                setErrorMessage(err.response.data.message)
+            }
+        }
+    }
+
+    const handleComment = async e => {
+        try {
+            e.preventDefault()
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/recipe/${id}/comment`, commentForm)
+            navigate(`/recipes/${id}`)
         } catch (err) {
             console.warn(err)
             if (err.response) {
@@ -61,6 +77,15 @@ export default function Recipe() {
 
             </div>
 
+            <form onSubmit={handleComment}>
+                <label htmlFor='comment'>Add a Comment:</label>
+                <textarea
+                    id='comment'
+                    value={commentForm.content}
+                    onChange={e => setCommentForm({ ...commentForm, content: e.target.value })}
+                ></textarea> 
+                <button>Submit Comment</button>
+            </form>
         </div>
     )
 }
